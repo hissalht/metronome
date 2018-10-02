@@ -21,6 +21,7 @@ class App extends Component {
 
   handleChange = name => value => this.setState({ [name]: value })
 
+  handleSliderChange = value => this.setState({ bpm: Math.round(value) })
 
   render() {
     const { bpm } = this.state
@@ -43,7 +44,7 @@ class App extends Component {
           <br />
           <Slider
             value={bpm}
-            onChange={this.handleChange('bpm')}
+            onChange={this.handleSliderChange}
             min={MIN_BPM}
             max={MAX_BPM}
             stepSize={1}
