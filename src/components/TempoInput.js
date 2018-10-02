@@ -10,7 +10,15 @@ class TempoInput extends Component {
     value: PropTypes.number,
     onChange: PropTypes.func.isRequired,
     min: PropTypes.number,
-    max: PropTypes.number
+    max: PropTypes.number,
+    placeholder: PropTypes.string
+  }
+
+  static defaultProps = {
+    value: 120,
+    min: 60,
+    max: 250,
+    placeholder: 'bpm'
   }
 
   state = {
@@ -27,7 +35,7 @@ class TempoInput extends Component {
 
   handleConfirm = value => {
     const { min, max, onChange } = this.props
-    let result = parseInt(value, 10)
+    let result = parseFloat(value, 10)
     if (min) { result = Math.max(result, min) }
     if (max) { result = Math.min(result, max) }
     onChange(result)
@@ -38,7 +46,7 @@ class TempoInput extends Component {
   }
 
   render() {
-    const { bpm } = this.state
+    const { bpm, placeholder } = this.state
 
     return (
       <EditableText
@@ -47,6 +55,8 @@ class TempoInput extends Component {
         onConfirm={this.handleConfirm}
         intent='primary'
         className={className}
+        type='number'
+        placeholder={placeholder}
       />
     )
   }

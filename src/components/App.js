@@ -17,10 +17,10 @@ class App extends Component {
   state = {
     bpm: 120,
     sound: 'default',
-
   }
 
   handleChange = name => value => this.setState({ [name]: value })
+
 
   render() {
     const { bpm } = this.state

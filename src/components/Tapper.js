@@ -34,22 +34,18 @@ class Tapper extends Component {
           lastIntervals: newIntervals,
           lastTimestamp: now
         }
+      }, () => {
+        const { min, max, onChange } = this.props
+        let bpm = 60000 / _.mean(this.state.lastIntervals)
+        if (min) { bpm = Math.max(bpm, min) }
+        if (max) { bpm = Math.min(bpm, max) }
+        onChange(+bpm.toFixed(1)) // rounding to 1 decimal
       })
 
     } else {
       this.setState({
         lastTimestamp: now,
       })
-    }
-  }
-
-  componentDidUpdate(prevProps, prevState) {
-    if (!_.isEqual(prevState.lastIntervals, this.state.lastIntervals)) {
-      const { min, max, onChange } = this.props
-      let bpm = 60000 / _.mean(this.state.lastIntervals)
-      if (min) { bpm = Math.max(bpm, min) }
-      if (max) { bpm = Math.min(bpm, max) }
-      onChange(bpm)
     }
   }
 
