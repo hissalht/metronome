@@ -5,6 +5,7 @@ import { Howl } from 'howler'
 import styles from './App.module.sass'
 import Tapper from './Tapper'
 import TempoInput from './TempoInput'
+import SignatureInput from './SignatureInput'
 import clickUrl from '../sounds/metronome.ogg'
 
 export const MAX_BPM = 250
@@ -64,13 +65,7 @@ class App extends Component {
     return (
       <div className={styles.root}>
         <div className={styles.container}>
-          <Tapper
-            text='Tap here'
-            onChange={this.handleBpmChange}
-            min={MIN_BPM}
-            max={MAX_BPM}
-          />
-          <br />
+          <SignatureInput />
           <div className={styles.playLine}>
             <TempoInput
               value={bpm}
@@ -78,13 +73,13 @@ class App extends Component {
               min={MIN_BPM}
               max={MAX_BPM}
             />
+            <div className={styles.spacer} />
             <Button
               icon={playing ? 'stop' : 'play'}
               large
               onClick={this.handlePlayButtonClick}
             />
           </div>
-          <br />
           <Slider
             value={bpm}
             onChange={this.handleSliderChange}
@@ -92,6 +87,12 @@ class App extends Component {
             max={MAX_BPM}
             stepSize={1}
             labelStepSize={20}
+          />
+          <Tapper
+            text='Tap here'
+            onChange={this.handleBpmChange}
+            min={MIN_BPM}
+            max={MAX_BPM}
           />
         </div>
       </div>

@@ -3,7 +3,7 @@ import memoize from 'memoize-one'
 import PropTypes from 'prop-types'
 import { EditableText } from '@blueprintjs/core'
 
-import { root as className } from './TempoInput.module.sass'
+import styles from './TempoInput.module.sass'
 
 class TempoInput extends Component {
   static propTypes = {
@@ -49,15 +49,19 @@ class TempoInput extends Component {
     const { bpm, placeholder } = this.state
 
     return (
-      <EditableText
-        value={bpm}
-        onChange={this.handleChange}
-        onConfirm={this.handleConfirm}
-        intent='primary'
-        className={className}
-        type='number'
-        placeholder={placeholder}
-      />
+      <div className={styles.root}>
+        <span>{'♩ = '}</span>
+        <EditableText
+          value={bpm}
+          onChange={this.handleChange}
+          onConfirm={this.handleConfirm}
+          intent='primary'
+          type='number'
+          placeholder={placeholder}
+          minWidth={100}
+          selectAllOnFocus
+        />
+      </div>
     )
   }
 }

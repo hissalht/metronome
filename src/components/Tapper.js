@@ -3,6 +3,8 @@ import PropTypes from 'prop-types'
 import { Button } from '@blueprintjs/core'
 import _ from 'lodash'
 
+import styles from './Tapper.module.sass'
+
 // max numbers of time intervals remembered to calculate bpm average
 const defaultMaxIntervals = 5
 
@@ -52,7 +54,9 @@ class Tapper extends Component {
   render() {
     const { text } = this.props
     return (
-      <Button large onClick={this.handleClick} text={text} />
+      <div className={styles.root}>
+        <Button fill onClick={this.handleClick} text={text} className={styles.button}/>
+      </div>
     )
   }
 }
