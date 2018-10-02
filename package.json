@@ -5,6 +5,7 @@
   "dependencies": {
     "@blueprintjs/core": "^3.6.1",
     "@blueprintjs/icons": "^3.1.0",
+    "howler": "^2.0.15",
     "lodash": "^4.17.11",
     "memoize-one": "^4.0.2",
     "react": "^16.5.2",
