@@ -45,7 +45,7 @@ class TempoInput extends Component {
     this.setBpm(this.props.value)
   }
 
-  render() {
+  render () {
     const { bpm, placeholder } = this.state
 
     return (

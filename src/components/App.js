@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component } from 'react'
 import { Button, Slider } from '@blueprintjs/core'
 import { Howl } from 'howler'
 
@@ -20,12 +20,12 @@ class App extends Component {
   state = {
     bpm: 120,
     sound: 'default',
-    playing: false,
+    playing: false
   }
 
   sound = new Howl({
     src: [clickUrl],
-    volume: .5
+    volume: 0.5
   })
 
   handleSliderChange = value => this.handleBpmChange(Math.round(value))
@@ -45,14 +45,14 @@ class App extends Component {
       this.sound.play()
       this.setSoundInterval(this.state.bpm)
     }
-    this.setState(({ playing }) => ({ playing: !playing}))
+    this.setState(({ playing }) => ({ playing: !playing }))
   }
 
   setSoundInterval = bpm => {
     clearInterval(this.soundHandle)
     this.soundHandle = setInterval(
       () => this.sound.play(),
-      60000/bpm
+      60000 / bpm
     )
   }
 
@@ -60,7 +60,7 @@ class App extends Component {
     clearInterval(this.soundHandle)
   }
 
-  render() {
+  render () {
     const { bpm, playing } = this.state
     return (
       <div className={styles.root}>
@@ -96,8 +96,8 @@ class App extends Component {
           />
         </div>
       </div>
-    );
+    )
   }
 }
 
-export default App;
+export default App

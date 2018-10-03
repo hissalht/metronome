@@ -27,7 +27,7 @@ class Tapper extends Component {
     if (this.state.lastTimestamp) {
       const interval = now - this.state.lastTimestamp
 
-      this.setState(({lastIntervals}) => {
+      this.setState(({ lastIntervals }) => {
         let newIntervals = [...lastIntervals, interval]
         if (newIntervals.length > (this.props.intervals || defaultMaxIntervals)) {
           newIntervals.shift()
@@ -43,19 +43,18 @@ class Tapper extends Component {
         if (max) { bpm = Math.min(bpm, max) }
         onChange(+bpm.toFixed(1)) // rounding to 1 decimal
       })
-
     } else {
       this.setState({
-        lastTimestamp: now,
+        lastTimestamp: now
       })
     }
   }
 
-  render() {
+  render () {
     const { text } = this.props
     return (
       <div className={styles.root}>
-        <Button fill onClick={this.handleClick} text={text} className={styles.button}/>
+        <Button fill onClick={this.handleClick} text={text} className={styles.button} />
       </div>
     )
   }

@@ -15,14 +15,14 @@ class SignatureInput extends Component {
     notesPerBar: 4
   }
 
-  render() {
+  render () {
     const { note, notesPerBar } = this.props
 
     return (
       <div className={styles.root}>
-        <EditableText defaultValue={note} intent='primary' maxLength={2} selectAllOnFocus className={styles.input}/>
+        <EditableText defaultValue={note} intent='primary' maxLength={2} selectAllOnFocus className={styles.input} />
         <span className={styles.spacer}>/</span>
-        <EditableText defaultValue={notesPerBar} intent='primary' maxLength={2} selectAllOnFocus className={styles.input}/>
+        <EditableText defaultValue={notesPerBar} intent='primary' maxLength={2} selectAllOnFocus className={styles.input} />
       </div>
     )
   }
