@@ -63,37 +63,40 @@ class App extends Component {
   render () {
     const { bpm, playing } = this.state
     return (
-      <div className={styles.root}>
-        <div className={styles.container}>
-          <SignatureInput />
-          <div className={styles.playLine}>
-            <TempoInput
+      <div className={`bp3-dark ${styles.root}`}>
+        <h1 className='bp3-heading'>Metronome</h1>
+        <div className={styles.flexRoot}>
+          <div className={styles.container}>
+            <SignatureInput />
+            <div className={styles.playLine}>
+              <TempoInput
+                value={bpm}
+                onChange={this.handleBpmChange}
+                min={MIN_BPM}
+                max={MAX_BPM}
+              />
+              <div className={styles.spacer} />
+              <Button
+                icon={playing ? 'stop' : 'play'}
+                large
+                onClick={this.handlePlayButtonClick}
+              />
+            </div>
+            <Slider
               value={bpm}
+              onChange={this.handleSliderChange}
+              min={MIN_BPM}
+              max={MAX_BPM}
+              stepSize={1}
+              labelStepSize={20}
+            />
+            <Tapper
+              text='Tap here'
               onChange={this.handleBpmChange}
               min={MIN_BPM}
               max={MAX_BPM}
             />
-            <div className={styles.spacer} />
-            <Button
-              icon={playing ? 'stop' : 'play'}
-              large
-              onClick={this.handlePlayButtonClick}
-            />
           </div>
-          <Slider
-            value={bpm}
-            onChange={this.handleSliderChange}
-            min={MIN_BPM}
-            max={MAX_BPM}
-            stepSize={1}
-            labelStepSize={20}
-          />
-          <Tapper
-            text='Tap here'
-            onChange={this.handleBpmChange}
-            min={MIN_BPM}
-            max={MAX_BPM}
-          />
         </div>
       </div>
     )
