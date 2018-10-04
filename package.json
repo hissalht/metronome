@@ -6,8 +6,7 @@
     "start": "node scripts/start.js",
     "build": "node scripts/build.js",
     "test": "node scripts/test.js",
-    "lint": "eslint --fix 'src/**/*.js' --config .eslintrc.precommit",
-    "precommit": "lint-staged"
+    "lint": "eslint --fix 'src/**/*.js' --config .eslintrc.precommit"
   },
   "lint-staged": {
     "linters": {
@@ -127,5 +126,10 @@
     "eslint-plugin-standard": "^4.0.0",
     "husky": "^1.1.0",
     "lint-staged": "^7.3.0"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged"
+    }
   }
 }
