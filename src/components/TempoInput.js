@@ -7,7 +7,7 @@ import styles from './TempoInput.module.sass'
 
 class TempoInput extends Component {
   static propTypes = {
-    value: PropTypes.number,
+    value: PropTypes.number.isRequired,
     onChange: PropTypes.func.isRequired,
     min: PropTypes.number,
     max: PropTypes.number,
@@ -22,6 +22,7 @@ class TempoInput extends Component {
   }
 
   state = {
+    previousBpm: null,
     bpm: this.props.value
   }
 
@@ -35,10 +36,20 @@ class TempoInput extends Component {
 
   handleConfirm = value => {
     const { min, max, onChange } = this.props
+    if (!value.trim()) {
+      this.setState(previous => ({ bpm: previous.previousBpm }))
+      onChange(this.state.previousBpm)
+      return
+    }
     let result = parseFloat(value, 10)
     if (min) { result = Math.max(result, min) }
     if (max) { result = Math.min(result, max) }
     onChange(result)
+  }
+
+  handleEdit = value => {
+    console.log('edit')
+    this.setState({ previousBpm: value })
   }
 
   componentDidUpdate (prevProps, prevState) {
@@ -46,7 +57,8 @@ class TempoInput extends Component {
   }
 
   render () {
-    const { bpm, placeholder } = this.state
+    const { bpm } = this.state
+    const { placeholder } = this.props
 
     return (
       <div className={styles.root}>
@@ -55,6 +67,7 @@ class TempoInput extends Component {
           value={bpm}
           onChange={this.handleChange}
           onConfirm={this.handleConfirm}
+          onEdit={this.handleEdit}
           intent='primary'
           type='number'
           placeholder={placeholder}
