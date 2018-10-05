@@ -86,8 +86,6 @@ class App extends Component {
       }, (error) => {
         if (error) {
           console.error(error)
-        } else {
-          console.log('State saved succesfuly')
         }
       })
     }
