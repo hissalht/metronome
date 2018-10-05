@@ -48,7 +48,6 @@ class TempoInput extends Component {
   }
 
   handleEdit = value => {
-    console.log('edit')
     this.setState({ previousBpm: value })
   }
 

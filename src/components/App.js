@@ -1,11 +1,13 @@
 import React, { Component } from 'react'
 import { Button, Slider } from '@blueprintjs/core'
 import { Howl } from 'howler'
+import classNames from 'classnames'
 
 import styles from './App.module.sass'
 import Tapper from './Tapper'
 import TempoInput from './TempoInput'
 import SignatureInput from './SignatureInput'
+import ThemeSwitcher from './ThemeSwitcher'
 import clickUrl from '../sounds/metronome.ogg'
 
 export const MAX_BPM = 250
@@ -20,7 +22,8 @@ class App extends Component {
   state = {
     bpm: 120,
     sound: 'default',
-    playing: false
+    playing: false,
+    dark: false
   }
 
   sound = new Howl({
@@ -60,10 +63,19 @@ class App extends Component {
     clearInterval(this.soundHandle)
   }
 
+  handleThemeChange = event => {
+    this.setState({ dark: event.currentTarget.checked })
+  }
+
   render () {
-    const { bpm, playing } = this.state
+    const { bpm, playing, dark } = this.state
+    const rootClasses = classNames({
+      [styles.root]: true,
+      'bp3-dark': dark,
+      [styles.dark]: dark
+    })
     return (
-      <div className={`bp3-dark ${styles.root}`}>
+      <div className={rootClasses}>
         <h1 className='bp3-heading'>Metronome</h1>
         <div className={styles.flexRoot}>
           <div className={styles.container}>
@@ -97,6 +109,9 @@ class App extends Component {
               max={MAX_BPM}
             />
           </div>
+        </div>
+        <div className={styles.themeSwitch}>
+          <ThemeSwitcher dark={dark} onChange={this.handleThemeChange} />
         </div>
       </div>
     )
