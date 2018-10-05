@@ -4,7 +4,9 @@ import './index.sass'
 import App from './components/App'
 import * as serviceWorker from './serviceWorker'
 
-ReactDOM.render(<App />, document.getElementById('root'))
+import { getSavedState, saveState } from './localStorage'
+
+ReactDOM.render(<App loadState={getSavedState} saveState={saveState} />, document.getElementById('root'))
 
 // If you want your app to work offline and load faster, you can change
 // unregister() to register() below. Note this comes with some pitfalls.

@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import PropTypes from 'prop-types'
 import { Button, Slider } from '@blueprintjs/core'
 import { Howl } from 'howler'
 import classNames from 'classnames'
@@ -19,11 +20,20 @@ export const SOUNDS = [
 ]
 
 class App extends Component {
-  state = {
-    bpm: 120,
-    sound: 'default',
-    playing: false,
-    dark: false
+  static propTypes = {
+    loadState: PropTypes.func.isRequired,
+    saveState: PropTypes.func.isRequired
+  }
+
+  constructor (props) {
+    super(props)
+    const savedState = props.loadState()
+    this.state = Object.assign({}, {
+      bpm: 120,
+      sound: 'default',
+      playing: false,
+      dark: false
+    }, savedState)
   }
 
   sound = new Howl({
@@ -65,6 +75,22 @@ class App extends Component {
 
   handleThemeChange = event => {
     this.setState({ dark: event.currentTarget.checked })
+  }
+
+  componentDidUpdate (previousProps, previousState) {
+    if (this.state !== previousState) {
+      this.props.saveState({
+        bpm: this.state.bpm,
+        dark: this.state.dark,
+        sound: this.state.sound
+      }, (error) => {
+        if (error) {
+          console.error(error)
+        } else {
+          console.log('State saved succesfuly')
+        }
+      })
+    }
   }
 
   render () {
