@@ -32,14 +32,26 @@ class App extends Component {
       bpm: 120,
       sound: 'default',
       playing: false,
-      dark: false
+      dark: false,
+      signature: {
+        beat: 4,
+        note: 4
+      }
     }, savedState)
   }
 
-  sound = new Howl({
-    src: [clickUrl],
-    volume: 0.5
-  })
+  sounds = {
+    beat: new Howl({
+      src: [clickUrl],
+      rate: 1,
+      volume: 0.5
+    }),
+    bar: new Howl({
+      src: [clickUrl],
+      rate: 1.5,
+      volume: 0.5
+    })
+  }
 
   handleSliderChange = value => this.handleBpmChange(Math.round(value))
 
@@ -55,7 +67,7 @@ class App extends Component {
     if (this.state.playing) {
       this.clearSoundInterval()
     } else {
-      this.sound.play()
+      this.sounds.beat.play()
       this.setSoundInterval(this.state.bpm)
     }
     this.setState(({ playing }) => ({ playing: !playing }))
@@ -64,7 +76,7 @@ class App extends Component {
   setSoundInterval = bpm => {
     clearInterval(this.soundHandle)
     this.soundHandle = setInterval(
-      () => this.sound.play(),
+      () => this.sounds.bar.play(),
       60000 / bpm
     )
   }

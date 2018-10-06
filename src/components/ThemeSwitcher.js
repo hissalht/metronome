@@ -1,11 +1,14 @@
 import React from 'react'
-import { Switch } from '@blueprintjs/core'
+import { Switch, Icon } from '@blueprintjs/core'
 import PropTypes from 'prop-types'
 
 const ThemeSwitcher = ({ dark, onChange }) => (
   <Switch
     alignIndicator='right'
-    label='Color theme' large checked={dark} onChange={onChange}
+    labelElement={<span><Icon icon={dark ? 'moon' : 'flash'} /> Theme</span>}
+    large
+    checked={dark}
+    onChange={onChange}
   />
 )
 
