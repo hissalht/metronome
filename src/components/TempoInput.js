@@ -36,6 +36,8 @@ class TempoInput extends Component {
 
   handleConfirm = value => {
     const { min, max, onChange } = this.props
+    // since value can be of type number, we convert it to string
+    value = value.toString()
     if (!value.trim()) {
       this.setState(previous => ({ bpm: previous.previousBpm }))
       onChange(this.state.previousBpm)
