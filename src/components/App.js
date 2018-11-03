@@ -9,6 +9,7 @@ import Tapper from './Tapper'
 import TempoInput from './TempoInput'
 import SignatureInput from './SignatureInput'
 import ThemeSwitcher from './ThemeSwitcher'
+import Footer from './Footer'
 import clickUrl from '../sounds/metronome.ogg'
 
 export const MAX_BPM = 250
@@ -113,13 +114,14 @@ class App extends Component {
     const rootClasses = classNames({
       [styles.root]: true,
       'bp3-dark': dark,
-      [styles.dark]: dark
+      [styles.dark]: dark,
+      [styles.verticalFlexRoot]: true
     })
 
     return (
       <div className={rootClasses}>
         <h1 className='bp3-heading'>Metronome</h1>
-        <div className={styles.flexRoot}>
+        <div className={styles.horizontalFlexRoot}>
           <div className={styles.container}>
             <SignatureInput
               {...signature}
@@ -160,6 +162,7 @@ class App extends Component {
         <div className={styles.themeSwitch}>
           <ThemeSwitcher dark={dark} onChange={this.handleThemeChange} />
         </div>
+        <Footer className={styles.footer} />
       </div>
     )
   }
