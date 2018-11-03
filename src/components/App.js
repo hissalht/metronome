@@ -34,7 +34,7 @@ class App extends Component {
       playing: false,
       dark: false,
       signature: {
-        beat: 4,
+        notesPerBar: 4,
         note: 4
       }
     }, savedState)
@@ -60,6 +60,11 @@ class App extends Component {
       this.setSoundInterval(value)
     }
     this.setState({ bpm: value })
+  }
+
+  handleSignatureChange = signature => {
+    console.log(signature)
+    this.setState({ signature })
   }
 
   handlePlayButtonClick = e => {
@@ -94,7 +99,8 @@ class App extends Component {
       this.props.saveState({
         bpm: this.state.bpm,
         dark: this.state.dark,
-        sound: this.state.sound
+        sound: this.state.sound,
+        signature: this.state.signature
       }, (error) => {
         if (error) {
           console.error(error)
@@ -104,18 +110,22 @@ class App extends Component {
   }
 
   render () {
-    const { bpm, playing, dark } = this.state
+    const { bpm, playing, dark, signature } = this.state
     const rootClasses = classNames({
       [styles.root]: true,
       'bp3-dark': dark,
       [styles.dark]: dark
     })
+
     return (
       <div className={rootClasses}>
         <h1 className='bp3-heading'>Metronome</h1>
         <div className={styles.flexRoot}>
           <div className={styles.container}>
-            <SignatureInput />
+            <SignatureInput
+              {...signature}
+              onChange={this.handleSignatureChange}
+            />
             <div className={styles.playLine}>
               <TempoInput
                 value={bpm}
