@@ -37,7 +37,8 @@ class App extends Component {
       signature: {
         notesPerBar: 4,
         note: 4
-      }
+      },
+      playingCount: 0
     }, savedState)
   }
 
@@ -72,7 +73,7 @@ class App extends Component {
     if (this.state.playing) {
       this.clearSoundInterval()
     } else {
-      this.sounds.beat.play()
+      this.sounds.bar.play()
       this.setSoundInterval(this.state.bpm)
     }
     this.setState(({ playing }) => ({ playing: !playing }))
@@ -81,12 +82,21 @@ class App extends Component {
   setSoundInterval = bpm => {
     clearInterval(this.soundHandle)
     this.soundHandle = setInterval(
-      () => this.sounds.bar.play(),
+      () => {
+        const isBarBeat = (this.state.playingCount + 1) % this.state.signature.notesPerBar === 0
+        if (isBarBeat) {
+          this.sounds.bar.play()
+        } else {
+          this.sounds.beat.play()
+        }
+        this.setState(previous => ({ playingCount: previous.playingCount + 1 }))
+      },
       60000 / bpm
     )
   }
 
   clearSoundInterval = () => {
+    this.setState({ playingCount: 0 })
     clearInterval(this.soundHandle)
   }
 
