@@ -63,7 +63,6 @@ class App extends Component {
   }
 
   handleSignatureChange = signature => {
-    console.log(signature)
     this.setState({ signature })
   }
 
