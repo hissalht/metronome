@@ -140,12 +140,14 @@ class App extends Component {
               />
             </div>
             <Slider
+              className={styles.slider}
               value={bpm}
               onChange={this.handleSliderChange}
               min={MIN_BPM}
               max={MAX_BPM}
               stepSize={1}
               labelStepSize={20}
+              // labelRenderer={false}
             />
             <Tapper
               text='Tap here'
