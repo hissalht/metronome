@@ -163,6 +163,7 @@ class App extends Component {
             />
             <Tapper
               text='Tap here'
+              tooltip='Tap along your desired tempo'
               onChange={this.handleBpmChange}
               min={MIN_BPM}
               max={MAX_BPM}
