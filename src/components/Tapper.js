@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
-import { Button } from '@blueprintjs/core'
+import { Button, Tooltip, Position } from '@blueprintjs/core'
 import _ from 'lodash'
 
 import styles from './Tapper.module.sass'
@@ -11,6 +11,7 @@ const defaultMaxIntervals = 5
 class Tapper extends Component {
   static propTypes = {
     text: PropTypes.string,
+    tooltip: PropTypes.string,
     onChange: PropTypes.func.isRequired,
     intervals: PropTypes.number,
     min: PropTypes.number,
@@ -51,10 +52,12 @@ class Tapper extends Component {
   }
 
   render () {
-    const { text } = this.props
+    const { text, tooltip } = this.props
     return (
       <div className={styles.root}>
-        <Button fill onClick={this.handleClick} text={text} className={styles.button} />
+        <Tooltip className={styles.tooltip} content={tooltip} disabled={!tooltip} position={Position.BOTTOM}>
+          <Button large fill onClick={this.handleClick} text={text} icon='hand-up' className={styles.button} />
+        </Tooltip>
       </div>
     )
   }
