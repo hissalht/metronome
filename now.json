@@ -1,5 +1,6 @@
 {
   "name": "metronomesque",
+  "alias": ["metronomesque", "metronome.adrienboutigny.site"],
   "version": 2,
   "builds": [
     { "src": "package.json", "use": "@now/static-build", "config": { "distDir": "build" }}
